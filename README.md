@@ -2,6 +2,11 @@
 
 > **Lógica de raciocínio > Christian Mendes.**
 
+![CI](https://github.com/dev-christianmendes/teste-backend-java/actions/workflows/ci.yml/badge.svg)
+![Java 17](https://img.shields.io/badge/Java-17-ED8B00)
+![Build](https://img.shields.io/badge/Maven-3.9-C71A36)
+![JUnit 5](https://img.shields.io/badge/Testes-JUnit%205-25A162)
+
 ## Sobre
 
 Projeto desenvolvido para o teste técnico de programação. Antes de escrever qualquer
@@ -81,6 +86,25 @@ Orientações gerais:
 | 3.11 | Total dos salários | Soma com `BigDecimal` |
 | 3.12 | Salários mínimos | Divisão com `RoundingMode.HALF_UP` (mínimo R$ 1.212,00) |
 
+## Diferenciais e decisões de projeto
+
+Além do que foi pedido, agreguei práticas que considero essenciais em qualquer
+código profissional:
+
+- **Camada de serviço** — `FuncionarioService` concentra as regras de negócio e o
+  `Principal` fica responsável apenas por orquestrar a execução e apresentar os
+  resultados (SRP).
+- **Testes automatizados (JUnit 5)** — 9 testes cobrindo cada regra do enunciado:
+  cadastro, remoção, aumento de 10%, agrupamento, aniversariantes, funcionário mais
+  velho, ordem alfabética, total de salários e salários mínimos.
+- **Stream API** — `filter`, `sorted`, `groupingBy` e `reduce` nos pontos onde o
+  código fica mais expressivo que o loop tradicional.
+- **`BigDecimal` para valores financeiros** — evita erro de arredondamento em
+  operações monetárias; formatação com `NumberFormat` pt-BR.
+- **CI com GitHub Actions** — o build e os testes rodam automaticamente a cada push
+  (badge no topo deste README).
+- **Maven Wrapper** — o projeto roda com `./mvnw` sem exigir Maven instalado.
+
 ## Minha abordagem
 
 Todo problema grande parece maior do que é. Por isso, dividi o teste em etapas que
@@ -120,22 +144,35 @@ pudessem ser concluídas uma por vez, sempre validando antes de seguir:
 ```
 teste-pratico-java
 ├── pom.xml
+├── mvnw
 ├── .gitignore
+├── .github/workflows/ci.yml
 ├── README.md
-└── src/main/java/br/com/teste/
-    ├── Principal.java
-    └── model/
-        ├── Pessoa.java
-        └── Funcionario.java
+└── src/
+    ├── main/java/br/com/teste/
+    │   ├── Principal.java
+    │   ├── model/
+    │   │   ├── Pessoa.java
+    │   │   └── Funcionario.java
+    │   └── service/
+    │       └── FuncionarioService.java
+    └── test/java/br/com/teste/service/
+        └── FuncionarioServiceTest.java
 ```
 
 ## Como compilar e executar
 
-Requisitos: **JDK 17+** e **Maven**.
+Requisitos: **JDK 17+** e **Maven** (ou apenas o JDK, usando o wrapper).
 
 ```bash
-mvn clean package
+./mvnw clean package
 java -cp target/classes br.com.teste.Principal
+```
+
+## Como testar
+
+```bash
+./mvnw test
 ```
 
 ## Saída esperada
