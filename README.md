@@ -78,11 +78,11 @@ Orientações gerais:
 | 3.2 | Remover "João" | `removeIf` filtrando pelo nome |
 | 3.3 | Imprimir funcionários | Data em `dd/MM/yyyy` e salário formatado com `NumberFormat` pt-BR |
 | 3.4 | Aumento de 10% | Multiplicação com `BigDecimal` e `setSalario` |
-| 3.5 | Agrupar por função | `Map<String, List<Funcionario>>` via `computeIfAbsent` |
+| 3.5 | Agrupar por função | `Map<String, List<Funcionario>>` com `Collectors.groupingBy` e `TreeMap` |
 | 3.6 | Imprimir agrupados | Iteração sobre o `Map` (funções em ordem alfabética com `TreeMap`) |
 | 3.8 | Aniversariantes mês 10 e 12 | Filtro pelo mês com `LocalDate.getMonthValue()` |
 | 3.9 | Funcionário mais velho | Comparação de datas + idade via `Period` |
-| 3.10 | Ordem alfabética | `sort` com `Comparator.comparing` |
+| 3.10 | Ordem alfabética | `sorted` com `Comparator.comparing` |
 | 3.11 | Total dos salários | Soma com `BigDecimal` |
 | 3.12 | Salários mínimos | Divisão com `RoundingMode.HALF_UP` (mínimo R$ 1.212,00) |
 
@@ -137,7 +137,7 @@ pudessem ser concluídas uma por vez, sempre validando antes de seguir:
 - **Collections** — `List`, `Map`, `ArrayList`, `TreeMap`.
 - **API de datas** — `LocalDate`, `DateTimeFormatter` e `Period`.
 - **Valores financeiros** — `BigDecimal` e `NumberFormat` pt-BR.
-- **Stream/Lambda** — `removeIf`, `computeIfAbsent`, method references e `Comparator`.
+- **Stream/Lambda** — `filter`, `sorted`, `groupingBy`, `reduce` e method references.
 
 ## Estrutura do projeto
 
